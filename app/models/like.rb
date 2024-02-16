@@ -23,39 +23,13 @@ class Like < ApplicationRecord
   #3 Like#fan: returns a row from the users table associated to this like by the fan_id column
   belongs_to(:fan, class_name: "User", foreign_key:"fan_id")
 
-  # def fan
-  #   my_fan_id = self.fan_id
-
-  #   matching_users = User.where({ :id => my_fan_id })
-
-  #   the_user = matching_users.at(0)
-
-  #   return the_user
-
-  # end
-
-  #------------------------------------------------------
   #4 Like#photo: returns a row from the photo table associated to this like by the photo_id column
   belongs_to(:photo, foreign_key: "photo_id")
   
-
-  # def photo
-  #   my_photo_id = self.photo_id
-
-  #   matching_photos = Photo.where({ :id => my_photo_id })
-
-  #   the_photo = matching_photos.at(0)
-
-  #   return the_photo
-  # end
-
-  #------------------------------------------------------
   #8 A User has Many liked Photos AND A Photo has Many fans. 
 
-  belongs_to(:photo)
-  belongs_to(:user)
-  #------------------------------------------------------
-  #10 
-
+  # belongs_to(:photo) Check #4 above. It's basically the same code. We just need to make the association ONCE!
+  # belongs_to(:fan, class_name:"User", foreign_key:"fan_id") Check #3 above. It's basically the same code. We just need to make the association ONCE! (even if it's solving a different rake grade problem)
+ 
 
 end

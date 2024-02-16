@@ -22,66 +22,22 @@ class Photo < ApplicationRecord
   #2 Photo#comments: returns rows from the comments table associated to this photo by the photo_id column. SEARCH like.rb
   has_many(:comments, class_name: "Comment", foreign_key: "photo_id")
 
-  # def comments
-  #   my_id = self.id
-
-  #   matching_comments = Comment.where({ :photo_id => self.id })
-
-  #   return matching_comments
-  # end
-
-  #------------------------------------------------------
   #4 Photo#likes: returns rows from the likes table associated to this photo by the photo_id column
   has_many(:likes, foreign_key:"photo_id")
 
-  # def likes
-  #   my_id = self.id
-
-  #   matching_likes = Like.where({ :photo_id => self.id })
-
-  #   return matching_likes
-  # end
-
-  #------------------------------------------------------
   #5 Photo#poster: returns a row from the users table associated to this photo by the owner_id column
   belongs_to(:poster, class_name:"User", foreign_key:"owner_id")
-
-  # def poster
-  #   my_owner_id = self.owner_id
-
-  #   matching_users = User.where({ :id => my_owner_id })
-
-  #   the_user = matching_users.at(0)
-
-  #   return the_user
-  # end
-  #------------------------------------------------------
   
   ## Indirect associations
 
   #8 Photo#fans: returns rows from the users table associated to this photo through its likes
 
-  has_many(:fans, through: :likes, source: :user)
+  has_many(:fans, through: :likes, source: :fan)
 
-  # def fans
-  #   my_likes = self.likes
-    
-  #   array_of_user_ids = Array.new
-
-  #   my_likes.each do |a_like|
-  #     array_of_user_ids.push(a_like.fan_id)
-  #   end
-
-  #   matching_users = User.where({ :id => array_of_user_ids })
-
-  #   return matching_users
-  # end
-  #------------------------------------------------------
   #9 Photo#commenters
 
   has_many(:commenters, through: :comments, source: :user)
 
-  #------------------------------------------------------
   #10 Photo#fan_list
 
   def fan_list

@@ -20,35 +20,12 @@ class FollowRequest < ApplicationRecord
   # Association accessor methods to define:
   
   ## Direct associations
-
   #6 FollowRequest#sender: returns a row from the users table associated to this follow request by the sender_id column
 
   belongs_to(:sender, class_name:"User", foreign_key:"sender_id")
 
-  # def sender
-  #   my_sender_id = self.sender_id
-
-  #   matching_users = User.where({ :id => my_sender_id })
-
-  #   the_user = matching_users.at(0)
-
-  #   return the_user
-  # end
-
-
-  #------------------------------------------------------
   #7 FollowRequest#recipient: returns a row from the users table associated to this follow request by the recipient_id column
 
   belongs_to(:recipient, class_name:"User", foreign_key:"recipient_id")
-
-  # def recipient
-  #   my_recipient_id = self.recipient_id
-
-  #   matching_users = User.where({ :id => my_recipient_id })
-
-  #   the_user = matching_users.at(0)
-
-  #   return the_user
-  # end
 
 end

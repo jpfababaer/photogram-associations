@@ -23,104 +23,27 @@ class User < ApplicationRecord
 
   #1 User#comments: returns rows from the comments table associated to this user by the author_id column. Whe we say has_many = Class (One, i.e. User) has_many Query table (Many) -> One-to-Many.
   has_many(:comments, class_name: "Comment", foreign_key: "author_id")
-
-    # def comments
-  #   my_id = self.id
-
-  #   matching_comments = Comment.where({ :author_id => my_id })
-
-  #   return matching_comments
-  # end
-
-  #------------------------------------------------------
+  
   #3 User#likes: returns rows from the likes table associated to this user by the fan_id column
   has_many(:likes, class_name: "Like", foreign_key: "fan_id")
 
-  # def likes
-  #   my_id = self.id
-
-  #   matching_likes = Like.where({ :fan_id => my_id })
-
-  #   return matching_likes
-  # end
-
-  #------------------------------------------------------
   #5 User#own_photos: returns rows from the photos table  associated to this user by the owner_id column
 
   has_many(:own_photos, class_name:"Photo", foreign_key:"owner_id")
 
-  # def own_photos
-  #   my_id = self.id
-
-  #   matching_photos = Photo.where({ :owner_id => my_id })
-
-  #   return matching_photos
-  # end
-
-  #------------------------------------------------------
   #6 User#sent_follow_requests: returns rows from the follow requests table associated to this user by the sender_id column
   has_many(:sent_follow_requests, class_name:"FollowRequest", foreign_key:"sender_id")
 
-  # def sent_follow_requests
-  #   my_id = self.id
-
-  #   matching_follow_requests = FollowRequest.where({ :sender_id => my_id })
-
-  #   return matching_follow_requests
-  # end
-
-  #------------------------------------------------------
   #7 User#received_follow_requests: returns rows from the follow requests table associated to this user by the recipient_id column
   has_many(:received_follow_requests, class_name:"FollowRequest", foreign_key:"recipient_id")
 
-  # def received_follow_requests
-  #   my_id = self.id
-
-  #   matching_follow_requests = FollowRequest.where({ :recipient_id => my_id })
-
-  #   return matching_follow_requests
-  # end
-
-  #------------------------------------------------------
   ## Indirect associations
-
-  #8 User#liked_photos: returns rows from the photos table associated to this user through its likes. Return the MANY photos a User liked.
-
+  #8 User liked_photos: returns rows from the photos table associated to this user through its likes. Return the MANY photos a User liked.
   has_many(:liked_photos, through: :likes, source: :photo)
 
-  # def liked_photos
-  #   my_likes = self.likes
-    
-  #   array_of_photo_ids = Array.new
-
-  #   my_likes.each do |a_like|
-  #     array_of_photo_ids.push(a_like.photo_id)
-  #   end
-
-  #   matching_photos = Photo.where({ :id => array_of_photo_ids })
-
-  #   return matching_photos
-  # end
-  #------------------------------------------------------
   #9 User#commented_photos: returns rows from the photos table associated to this user through its comments
   has_many(:commented_photos, through: :comments, source: :photo)
 
-  # def commented_photos
-  #   my_comments = self.comments
-    
-  #   array_of_photo_ids = Array.new
-
-  #   my_comments.each do |a_comment|
-  #     array_of_photo_ids.push(a_comment.photo_id)
-  #   end
-
-  #   matching_photos = Photo.where({ :id => array_of_photo_ids })
-
-  #   unique_matching_photos = matching_photos.distinct
-
-  #   return unique_matching_photos
-  # end
-  #------------------------------------------------------
   #10 
   has_many(:photos_liked, through: :likes)
 
