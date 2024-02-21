@@ -20,7 +20,7 @@ class Comment < ApplicationRecord
   #1 Comment#commenter: returns a row from the users table associated to this comment by the author_id column. When we say belongs_to = Class (Many, i.e. Comment) belongs_to Query table (One) -> Many-to-One.
   belongs_to(:commenter, class_name: "User", foreign_key: "author_id")
 
-  #1 Flow: we want to the method "commenter" on a Comment instance to query "User" table with the "author_id" FK to know who made the comment.
+  #1 Flow: we want the method "commenter" on a Comment instance to query "User" table with the "author_id" FK to know who made the comment.
 
   #2 Comment#photo: returns a row from the photos table associated to this comment by the photo_id column
   # belongs_to(:photo, class_name: "Photo", foreign_key: "photo_id") Solution for #2 and #9. We just need ONE of these lines!
